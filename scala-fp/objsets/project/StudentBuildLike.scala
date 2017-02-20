@@ -155,7 +155,7 @@ class StudentBuildLike protected() extends CommonBuild {
       s.log.info("Connecting to Coursera...")
       val response = Try(http.postData(data)
                          .headers(hs)
-                         .option(HttpOptions.connTimeout(10000)) // scalaj default timeout is only 100ms, changing that to 10s
+                         .option(HttpOptions.connTimeout(30000)) // scalaj default timeout is only 100ms, changing that to 10s
                          .asString) // kick off HTTP POST
       response
     }
