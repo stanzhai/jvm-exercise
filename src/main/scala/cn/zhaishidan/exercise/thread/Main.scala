@@ -1,12 +1,9 @@
 package cn.zhaishidan.exercise.thread
 
-<<<<<<< HEAD
 import java.util.concurrent.Executors
-=======
 import java.util.concurrent.{Executors, TimeUnit}
 
 import scala.concurrent.TimeoutException
->>>>>>> 16f9969e34827e465624b6fe52fc485877e2c8d9
 
 /**
   * Created by stan on 2016/11/15.
@@ -35,15 +32,9 @@ object Main {
   }
 
   def main(args: Array[String]): Unit = {
-<<<<<<< HEAD
     val service = Executors.newCachedThreadPool()
     service.shutdown()
     println("test")
-=======
-    doTask()
-    println("press any key to exit!")
-    System.in.read()
->>>>>>> 16f9969e34827e465624b6fe52fc485877e2c8d9
   }
 
 }
