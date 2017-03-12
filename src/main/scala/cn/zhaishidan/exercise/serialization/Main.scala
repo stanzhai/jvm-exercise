@@ -9,13 +9,14 @@ object Main {
     /*
     val task = new SimpleTask()
     task.run()
-    Serializer.writeObjectToFile(task, "task.ser")
+    FileSerializer.writeObjectToFile(task, "task.ser")
+    ClassManipulator.saveClassFile(task)
     */
 
-    /*
-    val task = Serializer.readObjectFromFile("task.ser").asInstanceOf[Task]
+    val fileClassLoader = new FileClassLoader()
+    val task = FileSerializer.readObjectFromFile("task.ser", fileClassLoader).asInstanceOf[Task]
     task.run()
-    */
+
 
     val testList = List.range(1, 3)
 
@@ -24,7 +25,9 @@ object Main {
     Serializer.writeObjectToFile({(x: Int) => x + 1}, "closure.ser")
     */
 
+    /*
     val fun = FileSerializer.readObjectFromFile("closure.ser").asInstanceOf[(Int) => Int]
     println(testList.map(fun).sum)
+    */
   }
 }

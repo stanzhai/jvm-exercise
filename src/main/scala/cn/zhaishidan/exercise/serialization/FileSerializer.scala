@@ -1,6 +1,6 @@
 package cn.zhaishidan.exercise.serialization
 
-import java.io.{FileInputStream, FileOutputStream, ObjectInputStream, ObjectOutputStream}
+import java.io._
 
 /**
  * Created by stan on 2017/2/20.
@@ -14,9 +14,12 @@ object FileSerializer {
     oos.close()
   }
 
-  def readObjectFromFile(file: String): Object = {
+  def readObjectFromFile(file: String, classLoader: ClassLoader): Object = {
     val fileStream = new FileInputStream(file)
-    val ois = new ObjectInputStream(fileStream)
+    val ois = new ObjectInputStream(fileStream) {
+      override def resolveClass(desc: ObjectStreamClass): Class[_] =
+        Class.forName(desc.getName, false, classLoader)
+    }
     val obj = ois.readObject()
     ois.close()
     obj
