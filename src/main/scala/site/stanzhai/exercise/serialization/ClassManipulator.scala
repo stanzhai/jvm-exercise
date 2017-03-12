@@ -14,7 +14,7 @@ object ClassManipulator {
     val stream = classLoader.getResourceAsStream(classFile)
 
     // just use the class simple name as the file name
-    val outputFile = obj.getClass.getSimpleName + ".class"
+    val outputFile = className.split('.').last + ".class"
     val fileStream = new FileOutputStream(outputFile)
     var data = stream.read()
     while (data != -1) {
