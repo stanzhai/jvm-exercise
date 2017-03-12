@@ -1,6 +1,4 @@
-package cn.zhaishidan.exercise.serialization;
-
-import cn.zhaishidan.exercise.serialization.Task;
+package site.stanzhai.exercise.serialization;
 
 /**
  * Created by stan on 2017/1/8.

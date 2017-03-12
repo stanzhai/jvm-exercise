@@ -1,14 +1,16 @@
-package cn.zhaishidan.exercise.serialization
+package site.stanzhai.exercise.serialization
 
 import java.io.{ByteArrayOutputStream, FileInputStream}
 
 /**
   * Created by stan on 2017/3/12.
+  * A Simple File Class Loader
+  * The file name is the SimpleClassName (without package name)
   */
 class FileClassLoader() extends ClassLoader {
 
-  override def findClass(name: String): Class[_] = {
-    val file = name.split('.').last + ".class"
+  override def findClass(fullClassName: String): Class[_] = {
+    val file = fullClassName.split('.').last + ".class"
     val in = new FileInputStream(file)
     val bos = new ByteArrayOutputStream
     val bytes = new Array[Byte](4096)
@@ -22,6 +24,6 @@ class FileClassLoader() extends ClassLoader {
       }
     }
     val data = bos.toByteArray
-    defineClass(name, data, 0, data.length)
+    defineClass(fullClassName, data, 0, data.length)
   }
 }

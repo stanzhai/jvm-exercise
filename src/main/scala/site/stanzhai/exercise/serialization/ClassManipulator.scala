@@ -1,7 +1,6 @@
-package cn.zhaishidan.exercise.serialization
+package site.stanzhai.exercise.serialization
 
-import java.io.{File, FileOutputStream}
-import java.net.URLClassLoader
+import java.io.{FileOutputStream}
 
 /**
   * Created by stan on 2017/3/12.
@@ -11,10 +10,12 @@ object ClassManipulator {
   def saveClassFile(obj: AnyRef): Unit = {
     val classLoader = obj.getClass.getClassLoader
     val className = obj.getClass.getName
-    val file = className.replace('.', '/') + ".class"
-    val stream = classLoader.getResourceAsStream(file)
+    val classFile = className.replace('.', '/') + ".class"
+    val stream = classLoader.getResourceAsStream(classFile)
 
-    val fileStream = new FileOutputStream(file)
+    // just use the class simple name as the file name
+    val outputFile = obj.getClass.getSimpleName + ".class"
+    val fileStream = new FileOutputStream(outputFile)
     var data = stream.read()
     while (data != -1) {
       fileStream.write(data)

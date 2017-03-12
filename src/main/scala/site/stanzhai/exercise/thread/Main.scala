@@ -1,4 +1,4 @@
-package cn.zhaishidan.exercise.thread
+package site.stanzhai.exercise.thread
 
 import java.util.concurrent.Executors
 import java.util.concurrent.{Executors, TimeUnit}

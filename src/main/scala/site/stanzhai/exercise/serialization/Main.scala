@@ -1,4 +1,4 @@
-package cn.zhaishidan.exercise.serialization
+package site.stanzhai.exercise.serialization
 
 /**
   * Created by stan on 2017/1/8.
@@ -16,7 +16,6 @@ object Main {
     val fileClassLoader = new FileClassLoader()
     val task = FileSerializer.readObjectFromFile("task.ser", fileClassLoader).asInstanceOf[Task]
     task.run()
-
 
     val testList = List.range(1, 3)
 

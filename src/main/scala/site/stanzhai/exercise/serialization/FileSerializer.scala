@@ -1,4 +1,4 @@
-package cn.zhaishidan.exercise.serialization
+package site.stanzhai.exercise.serialization
 
 import java.io._
 

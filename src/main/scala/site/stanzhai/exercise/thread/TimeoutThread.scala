@@ -1,4 +1,4 @@
-package cn.zhaishidan.exercise.thread
+package site.stanzhai.exercise.thread
 
 /**
   * Created by stan on 2016/11/15.
