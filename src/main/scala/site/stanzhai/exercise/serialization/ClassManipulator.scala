@@ -23,6 +23,7 @@ object ClassManipulator {
     }
     fileStream.flush()
     fileStream.close()
+    println(s"save class: $className to $outputFile")
   }
 
 }
