@@ -62,15 +62,29 @@ object TimeUsage {
     *         have type Double. None of the fields are nullable.
     * @param columnNames Column names of the DataFrame
     */
-  def dfSchema(columnNames: List[String]): StructType =
-    ???
+  def dfSchema(columnNames: List[String]): StructType = {
+    var isFirst = true
+    val cols = for (col <- columnNames) yield {
+      val dataType = if (isFirst) DataTypes.StringType else DataTypes.DoubleType
+      isFirst = false
+      StructField(col, dataType, false)
+    }
+    StructType(cols)
+  }
 
 
   /** @return An RDD Row compatible with the schema produced by `dfSchema`
     * @param line Raw fields
     */
-  def row(line: List[String]): Row =
-    ???
+  def row(line: List[String]): Row = {
+    var isFirst = true
+    val lineData = for (data <- line) yield {
+      val d = if (isFirst) data.replace("\"", "") else data.toDouble
+      isFirst = false
+      d
+    }
+    Row.fromSeq(lineData)
+  }
 
   /** @return The initial data frame columns partitioned in three groups: primary needs (sleeping, eating, etc.),
     *         work and other (leisure activities)
@@ -88,7 +102,17 @@ object TimeUsage {
     *    “t10”, “t12”, “t13”, “t14”, “t15”, “t16” and “t18” (those which are not part of the previous groups only).
     */
   def classifiedColumns(columnNames: List[String]): (List[Column], List[Column], List[Column]) = {
-    ???
+    val primaryNeeds = for (name <- columnNames if name.startsWith("t01") || name.startsWith("t03") ||
+      name.startsWith("t11") || name.startsWith("t1801") || name.startsWith("t1803")) yield {
+      name
+    }
+    val working = for (name <- columnNames if name.startsWith("t05") || name.startsWith("t1805")) yield {
+      name
+    }
+    val other = for (name <- columnNames if !primaryNeeds.contains(name) && !working.contains(name)) yield {
+      name
+    }
+    (primaryNeeds.map(column), working.map(column), other.map(column))
   }
 
   /** @return a projection of the initial DataFrame such that all columns containing hours spent on primary needs
