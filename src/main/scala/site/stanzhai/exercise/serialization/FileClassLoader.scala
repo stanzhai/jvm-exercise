@@ -3,7 +3,6 @@ package site.stanzhai.exercise.serialization
 import java.io.{ByteArrayOutputStream, FileInputStream}
 
 /**
-  * Created by stan on 2017/3/12.
   * A Simple File Class Loader
   * The file name is the SimpleClassName (without package name)
   */

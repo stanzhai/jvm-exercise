@@ -2,9 +2,6 @@ package site.stanzhai.exercise.serialization
 
 import java.io._
 
-/**
- * Created by stan on 2017/2/20.
- */
 object FileSerializer {
 
   def writeObject(obj: Object, file: String) = {

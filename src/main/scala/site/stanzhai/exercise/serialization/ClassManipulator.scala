@@ -2,9 +2,6 @@ package site.stanzhai.exercise.serialization
 
 import java.io.{FileOutputStream}
 
-/**
-  * Created by stan on 2017/3/12.
-  */
 object ClassManipulator {
 
   def saveClassFile(obj: AnyRef): Unit = {

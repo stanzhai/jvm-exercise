@@ -1,8 +1,5 @@
 package site.stanzhai.exercise.serialization;
 
-/**
- * Created by stan on 2017/1/8.
- */
 /*
 public class SimpleTask extends Task {
 
