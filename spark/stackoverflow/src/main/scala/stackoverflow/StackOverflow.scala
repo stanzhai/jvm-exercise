@@ -27,6 +27,7 @@ object StackOverflow extends StackOverflow {
     val vectors = vectorPostings(scored)
     assert(vectors.count() == 2121822, "Incorrect number of vectors: " + vectors.count())
 
+    // vectors.cache()
     val means   = kmeans(sampleVectors(vectors), vectors, debug = true)
     val results = clusterResults(means, vectors)
     printResults(results)
@@ -180,11 +181,22 @@ class StackOverflow extends Serializable {
 
   /** Main kmeans computation */
   @tailrec final def kmeans(means: Array[(Int, Int)], vectors: RDD[(Int, Int)], iter: Int = 1, debug: Boolean = false): Array[(Int, Int)] = {
-    val newMeans = vectors.map(p => (findClosest(p, means), p))
+    val matchedMeans = vectors.map(p => (findClosest(p, means), p))
       .groupByKey()
       .mapValues(averageVectors)
-      .values
       .collect()
+      .toMap
+
+    var idx = 0
+    val newMeans = for (mean <- means) yield {
+      val r = if (matchedMeans.contains(idx)) {
+        matchedMeans(idx)
+      } else {
+        mean
+      }
+      idx = idx + 1
+      r
+    }
 
     val distance = euclideanDistance(means, newMeans)
 
